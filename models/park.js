@@ -15,53 +15,58 @@ Park.prototype.RemoveDinosaurByName = function (dino) {
 
 Park.prototype.mostVisitors = function () {
     let max = 0;
+    let winner = []
     for (dinosaur of this.collection) {
         if (dinosaur.guestsAttractedPerDay > max){
             max = dinosaur.guestsAttractedPerDay;
         }
-    
     }
-    return max;
+    for (dinosaur of this.collection) {
+        if (dinosaur.guestsAttractedPerDay === max){
+            winner.push(dinosaur);
+        }
+    }
+    return winner;
 };
 
+Park.prototype.findSpecies = function (dino) {
+    let same_species = [];
+    for (dinosaur of this.collection) {
+        if (dinosaur.species == dino.species) {
+            same_species.push(dinosaur)
+        }
+    }
+    return same_species;
+}
 
+Park.prototype.totalVisitors = function () {
+    let total = 0;
+    for (const dino of this.collection) {
+        total += dino.guestsAttractedPerDay;
+    }
+    return total;
+}
 
-    // let max = 0;
-    // let popularDinosaur = Dinosaur2;
-    // this.collection.forEach(dinosaur => {
-    //     if (dinosaur.guestsAttractedPerDay > max){
-    //         max = dinosaur.guestsAttractedPerDay;
-    //     }
-    // })
-    // // for (dinosaur of this.collection){
-    // //     if (dinosaur.guestsAttractedPerDay === max){
-    // //         popularDinosaur = dinosaur;
-    // //     }
-    // // }
-    // return popularDinosaur;
+Park.prototype.visits_per_year = function () {
+    let days_in_year = 365;
+    let total = 0;
+    for (const dino of this.collection) {
+        total += dino.guestsAttractedPerDay;
+    }
+    let visits_yearly = total*days_in_year
+    return visits_yearly;
+}
 
-
-    // let max = 0;
-    // let dino_list = [];
-    // this.collection.forEach(dino => {
-    //     if (dino.guestsAttractedPerDay > max) {
-    //         max = dino.guestsAttractedPerDay;
-    //     }
-    //     this.collection.forEach(dino => {
-    //         if (dino.guestsAttractedPerDay === max) {
-    //             dino_list.push(dino);
-    //         }
-    //     }
-    //     }
-    // }
-    // return dino_list[0];
-    // );
-// // ................................................
-//     let arr = Object.values(this.collection);
-//     let max = Math.max(...arr);
-//     return max;
-// //..................................................
-//     return Math.max.apply(null, this.collection);
+Park.prototype.revenue = function () {
+    let days_in_year = 365;
+    let tickets = this.ticket_price;
+    let total = 0;
+    for (const dino of this.collection) {
+        total += dino.guestsAttractedPerDay;
+    }
+    let income = (total*days_in_year)*tickets
+    return income;
+}
 
 
 module.exports = Park;

@@ -49,17 +49,43 @@ let park;
     park.addDinosaur(Dinosaur1)
     park.addDinosaur(Dinosaur2)
     park.addDinosaur(Dinosaur3)
-    const expected = 75;
+    const expected = [Dinosaur2]
     const actual = park.mostVisitors();
-    assert.strictEqual(actual, expected)
+    assert.deepStrictEqual(actual, expected);
   });
 
-  it('should be able to find all dinosaurs of a particular species');
+  it('should be able to find all dinosaurs of a particular species', function() {
+    park.addDinosaur(Dinosaur2)
+    park.addDinosaur(Dinosaur2)
+    park.addDinosaur(Dinosaur3)
+    const expected = [Dinosaur2, Dinosaur2]
+    const actual = park.findSpecies(Dinosaur2);
+    assert.deepStrictEqual(actual, expected);
 
-  it('should be able to calculate the total number of visitors per day');
+  });
 
-  it('should be able to calculate the total number of visitors per year');
+  it('should be able to calculate the total number of visitors per day', function() {
+    park.addDinosaur(Dinosaur2)
+    park.addDinosaur(Dinosaur2)
+    park.addDinosaur(Dinosaur3)
+    const expected = 160;
+    assert.strictEqual(park.totalVisitors(), expected);
+  });
 
-  it('should be able to calculate total revenue for one year');
+  it('should be able to calculate the total number of visitors per year', function() {
+    park.addDinosaur(Dinosaur3)
+    park.addDinosaur(Dinosaur3)
+    const expected = 7300;
+    assert.strictEqual(park.visits_per_year(), expected)
+
+  });
+
+  it('should be able to calculate total revenue for one year', function() {
+    park.addDinosaur(Dinosaur3)
+    park.addDinosaur(Dinosaur3)
+    const expected = 73000;
+    assert.strictEqual(park.revenue(), expected)
+
+  });
 
 });
